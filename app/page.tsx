@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ROICalculator } from "@/components/ROICalculator";
+import ROICalculator from "@/components/ROICalculator";
 import { ArrowRight, BarChart3, Bot, Clapperboard, Globe2, Megaphone, Search, Star, Target, Video } from "lucide-react";
 
 const services = [
