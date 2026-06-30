@@ -1,42 +1,209 @@
- "use client";
+"use client";
+
 import { useMemo, useState } from "react";
 
-export function ROICalculator() {
-  const [budget, setBudget] = useState(2000);
-  const [aov, setAov] = useState(50);
-  const [roas, setRoas] = useState(3.5);
-  const revenue = useMemo(() => Math.round(budget * roas), [budget, roas]);
-  const orders = useMemo(() => Math.round(revenue / Math.max(aov, 1)), [revenue, aov]);
+export default function ROICalculator() {
+  const [monthlyVisitors, setMonthlyVisitors] = useState(5000);
+  const [conversionRate, setConversionRate] = useState(3);
+  const [averageOrderValue, setAverageOrderValue] = useState(75);
+  const [adSpend, setAdSpend] = useState(1500);
+  const [improvementRate, setImprovementRate] = useState(25);
+
+  const results = useMemo(() => {
+    const currentLeads = monthlyVisitors * (conversionRate / 100);
+    const currentRevenue = currentLeads * averageOrderValue;
+
+    const improvedConversionRate =
+      conversionRate + conversionRate * (improvementRate / 100);
+
+    const improvedLeads = monthlyVisitors * (improvedConversionRate / 100);
+    const improvedRevenue = improvedLeads * averageOrderValue;
+
+    const extraRevenue = improvedRevenue - currentRevenue;
+    const roi = adSpend > 0 ? ((extraRevenue - adSpend) / adSpend) * 100 : 0;
+
+    return {
+      currentLeads,
+      currentRevenue,
+      improvedLeads,
+      improvedRevenue,
+      extraRevenue,
+      roi,
+    };
+  }, [monthlyVisitors, conversionRate, averageOrderValue, adSpend, improvementRate]);
+
+  const money = (value: number) =>
+    value.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
 
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-5">
-        <div className="gradient-dark grid gap-8 rounded-[2rem] p-8 text-white md:grid-cols-2 md:p-12">
-          <div>
-            <p className="mb-3 text-sm font-black text-emerald-300">INTERACTIVE ROI CALCULATOR</p>
-            <h2 className="mb-4 text-4xl font-black tracking-tight md:text-5xl">Estimate your growth potential.</h2>
-            <p className="text-slate-300">Use this as a planning tool. Final results depend on your offer, location, creative quality, landing page, and follow-up speed.</p>
-            <div className="mt-8 space-y-4">
-              <label className="block rounded-2xl bg-white/10 p-4">Monthly ad budget
-                <input className="mt-2 w-full rounded-xl border-0 p-3 text-ink" type="number" value={budget} onChange={e=>setBudget(+e.target.value)} />
-              </label>
-              <label className="block rounded-2xl bg-white/10 p-4">Average sale/order value
-                <input className="mt-2 w-full rounded-xl border-0 p-3 text-ink" type="number" value={aov} onChange={e=>setAov(+e.target.value)} />
-              </label>
-              <label className="block rounded-2xl bg-white/10 p-4">Target ROAS
-                <input className="mt-2 w-full rounded-xl border-0 p-3 text-ink" type="number" step=".1" value={roas} onChange={e=>setRoas(+e.target.value)} />
-              </label>
-            </div>
+    <section id="roi-calculator" className="py-24 bg-slate-950 text-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <p className="text-cyan-400 font-semibold mb-3">
+            Interactive ROI Calculator
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5">
+            See how much extra revenue better marketing can create.
+          </h2>
+          <p className="text-slate-300">
+            Enter your current traffic, conversion rate, average order value,
+            and marketing spend. The calculator updates instantly.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="bg-white/10 border border-white/10 rounded-3xl p-8">
+            <CalculatorInput
+              label="Monthly Website Visitors"
+              value={monthlyVisitors}
+              setValue={setMonthlyVisitors}
+              min={100}
+              max={100000}
+              step={100}
+            />
+
+            <CalculatorInput
+              label="Current Conversion Rate (%)"
+              value={conversionRate}
+              setValue={setConversionRate}
+              min={0.5}
+              max={25}
+              step={0.5}
+            />
+
+            <CalculatorInput
+              label="Average Customer Value ($)"
+              value={averageOrderValue}
+              setValue={setAverageOrderValue}
+              min={10}
+              max={1000}
+              step={5}
+            />
+
+            <CalculatorInput
+              label="Monthly Marketing Spend ($)"
+              value={adSpend}
+              setValue={setAdSpend}
+              min={0}
+              max={50000}
+              step={100}
+            />
+
+            <CalculatorInput
+              label="Expected Improvement (%)"
+              value={improvementRate}
+              setValue={setImprovementRate}
+              min={5}
+              max={200}
+              step={5}
+            />
           </div>
-          <div className="rounded-[1.6rem] bg-white p-8 text-ink">
-            <p className="font-bold text-slate-500">Estimated monthly revenue opportunity</p>
-            <div className="my-5 text-6xl font-black text-brand">${revenue.toLocaleString()}</div>
-            <p className="text-lg font-bold">{orders.toLocaleString()} estimated orders / leads-to-sales equivalent</p>
-            <p className="mt-4 text-sm leading-6 text-slate-500">This is a directional projection, not a guarantee. We prepare a realistic forecast during your free audit.</p>
-            <a href="#contact" className="gradient-brand mt-8 inline-flex rounded-full px-6 py-4 font-black text-white">Get My Real Forecast</a>
+
+          <div className="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/20 rounded-3xl p-8">
+            <h3 className="text-2xl font-bold mb-6">Your Estimated Results</h3>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              <ResultCard
+                label="Current Monthly Revenue"
+                value={money(results.currentRevenue)}
+              />
+              <ResultCard
+                label="Projected Monthly Revenue"
+                value={money(results.improvedRevenue)}
+              />
+              <ResultCard
+                label="Extra Monthly Revenue"
+                value={money(results.extraRevenue)}
+              />
+              <ResultCard
+                label="Estimated ROI"
+                value={`${results.roi.toFixed(0)}%`}
+              />
+            </div>
+
+            <div className="bg-slate-900/70 rounded-2xl p-6 border border-white/10">
+              <p className="text-slate-300 mb-2">Estimated extra annual revenue</p>
+              <div className="text-4xl font-extrabold text-cyan-300">
+                {money(results.extraRevenue * 12)}
+              </div>
+              <p className="text-sm text-slate-400 mt-4">
+                This is an estimate only. Actual results depend on your offer,
+                website quality, ad strategy, reviews, location, competition,
+                and follow-up process.
+              </p>
+            </div>
+
+            <a
+              href="#contact"
+              className="mt-8 inline-flex w-full justify-center rounded-full bg-cyan-400 text-slate-950 font-bold px-6 py-4 hover:bg-cyan-300 transition"
+            >
+              Get My Free Growth Plan
+            </a>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function CalculatorInput({
+  label,
+  value,
+  setValue,
+  min,
+  max,
+  step,
+}: {
+  label: string;
+  value: number;
+  setValue: (value: number) => void;
+  min: number;
+  max: number;
+  step: number;
+}) {
+  return (
+    <div className="mb-7">
+      <div className="flex justify-between gap-4 mb-2">
+        <label className="font-semibold">{label}</label>
+        <span className="text-cyan-300 font-bold">
+          {label.includes("$")
+            ? `$${value.toLocaleString()}`
+            : value.toLocaleString()}
+        </span>
+      </div>
+
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => setValue(Number(e.target.value))}
+        className="w-full"
+      />
+
+      <input
+        type="number"
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+        onChange={(e) => setValue(Number(e.target.value))}
+        className="mt-3 w-full rounded-xl bg-slate-900 border border-white/10 px-4 py-3 text-white outline-none focus:border-cyan-400"
+      />
+    </div>
+  );
+}
+
+function ResultCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-slate-900/70 rounded-2xl p-5 border border-white/10">
+      <p className="text-sm text-slate-400 mb-2">{label}</p>
+      <p className="text-2xl font-extrabold">{value}</p>
+    </div>
   );
 }
