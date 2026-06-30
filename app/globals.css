@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { @apply bg-white text-ink antialiased; }
+.gradient-dark {
+  background:
+    radial-gradient(circle at 20% 5%, rgba(37,99,235,.38), transparent 30%),
+    radial-gradient(circle at 85% 10%, rgba(16,185,129,.25), transparent 28%),
+    linear-gradient(135deg,#07111f,#0f172a 65%,#082f49);
+}
+.gradient-brand { background: linear-gradient(135deg,#2563EB,#06B6D4 50%,#10B981); }
+.card { @apply rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl; }
