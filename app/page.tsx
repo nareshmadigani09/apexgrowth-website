@@ -1,3 +1,4 @@
+"use client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import ROICalculator from "@/components/ROICalculator";
@@ -15,14 +16,62 @@ import {
 } from "lucide-react";
 
 const services = [
-  ["SEO & Local SEO", "Rank higher in Google and Maps for local searches.", Search],
-  ["Google Ads", "High-intent campaigns built for calls, leads, and sales.", Target],
-  ["Meta Ads", "Facebook and Instagram ads for offers, leads, and retargeting.", Megaphone],
-  ["Web Design", "Premium websites and landing pages built to convert.", Globe2],
-  ["Flyers & Branding", "High-end creatives for offers, launches, events, and menus.", Clapperboard],
-  ["Reels & Video Editing", "Short-form videos with hooks, captions, and strong CTAs.", Video],
-  ["AI Automation", "Chatbots, missed lead follow-up, CRM, SMS, and review automation.", Bot],
-  ["Analytics Dashboard", "Track leads, sales, calls, ROAS, rankings, and campaign ROI.", BarChart3],
+  {
+    title: "SEO & Local SEO",
+    desc: "Rank higher in Google and Maps for high-intent local searches.",
+    Icon: Search,
+    details:
+      "We optimize your website and Google Business Profile so customers nearby can find you when they search for your service. We improve keywords, pages, reviews, local listings, photos, posts, and ranking signals.",
+  },
+  {
+    title: "Google Ads",
+    desc: "Conversion-focused PPC campaigns with tracking and weekly optimization.",
+    Icon: Target,
+    details:
+      "We create Google Ads for people actively searching for your service. We manage keywords, ads, landing pages, call tracking, budgets, and weekly improvements to reduce wasted spend and increase leads.",
+  },
+  {
+    title: "Meta Ads",
+    desc: "Facebook and Instagram campaigns for leads, offers, retargeting, and brand awareness.",
+    Icon: Megaphone,
+    details:
+      "We run Facebook and Instagram campaigns with strong offers, creative designs, videos, and retargeting. The goal is to reach new customers and bring back people who already showed interest.",
+  },
+  {
+    title: "Web Design",
+    desc: "Premium websites and landing pages built to convert visitors into customers.",
+    Icon: Globe2,
+    details:
+      "We build websites that look premium and guide visitors to take action: call, book, order, or submit a form. We focus on speed, mobile design, clear offers, trust, and conversion.",
+  },
+  {
+    title: "Flyers & Branding",
+    desc: "High-end promotional creatives for offers, launches, events, and menus.",
+    Icon: Clapperboard,
+    details:
+      "We create professional flyers, posters, menus, banners, and brand graphics that make your business look established and help your offers stand out online and offline.",
+  },
+  {
+    title: "Reels & Video Editing",
+    desc: "Short-form videos with captions, hooks, transitions, and social-first formatting.",
+    Icon: Video,
+    details:
+      "We create short videos for Instagram, Facebook, TikTok, and YouTube Shorts. We add hooks, captions, music, transitions, and call-to-actions to help customers stop scrolling.",
+  },
+  {
+    title: "AI Automation",
+    desc: "Chatbots, missed lead follow-up, CRM workflows, and review automation.",
+    Icon: Bot,
+    details:
+      "We automate follow-ups, missed calls, website chats, review requests, and customer reactivation. This helps you respond faster and recover leads that usually get lost.",
+  },
+  {
+    title: "Analytics Dashboard",
+    desc: "Clear reporting for leads, orders, calls, ROAS, rankings, and traffic.",
+    Icon: BarChart3,
+    details:
+      "We build a clear dashboard so you can see what is working: leads, calls, orders, ad spend, revenue, rankings, and ROI. No confusing reports — just business numbers.",
+  },
 ];
 
 const industries = [
@@ -222,17 +271,18 @@ export default function Home() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-4">
-              {services.map(([title, desc, Icon]: any) => (
-                <div className="card p-6 transition hover:-translate-y-1 hover:shadow-xl" key={title}>
-                  <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-brand">
-                    <Icon />
-                  </div>
-                  <h3 className="mb-2 text-xl font-black">{title}</h3>
-                  <p className="leading-7 text-slate-500">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+  {services.map(([title, desc, Icon]: any)=>
+    <div className="card p-6" key={title}>
+      <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-brand">
+        <Icon />
+      </div>
+
+      <h3 className="mb-2 text-xl font-black">{title}</h3>
+
+      <p className="leading-7 text-slate-500">{desc}</p>
+    </div>
+  )}
+</div>          </div>
         </section>
 
         <section className="bg-navy py-24 text-white">
