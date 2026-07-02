@@ -1,4 +1,3 @@
-"use client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import ROICalculator from "@/components/ROICalculator";
@@ -25,35 +24,35 @@ const services = [
   },
   {
     title: "Google Ads",
-    desc: "Conversion-focused PPC campaigns with tracking and weekly optimization.",
+    desc: "High-intent campaigns built for calls, leads, and sales.",
     Icon: Target,
     details:
       "We create Google Ads for people actively searching for your service. We manage keywords, ads, landing pages, call tracking, budgets, and weekly improvements to reduce wasted spend and increase leads.",
   },
   {
     title: "Meta Ads",
-    desc: "Facebook and Instagram campaigns for leads, offers, retargeting, and brand awareness.",
+    desc: "Facebook and Instagram ads for offers, leads, and retargeting.",
     Icon: Megaphone,
     details:
       "We run Facebook and Instagram campaigns with strong offers, creative designs, videos, and retargeting. The goal is to reach new customers and bring back people who already showed interest.",
   },
   {
     title: "Web Design",
-    desc: "Premium websites and landing pages built to convert visitors into customers.",
+    desc: "Premium websites and landing pages built to convert.",
     Icon: Globe2,
     details:
       "We build websites that look premium and guide visitors to take action: call, book, order, or submit a form. We focus on speed, mobile design, clear offers, trust, and conversion.",
   },
   {
     title: "Flyers & Branding",
-    desc: "High-end promotional creatives for offers, launches, events, and menus.",
+    desc: "High-end creatives for offers, launches, events, and menus.",
     Icon: Clapperboard,
     details:
       "We create professional flyers, posters, menus, banners, and brand graphics that make your business look established and help your offers stand out online and offline.",
   },
   {
     title: "Reels & Video Editing",
-    desc: "Short-form videos with captions, hooks, transitions, and social-first formatting.",
+    desc: "Short videos with hooks, captions, transitions, and CTAs.",
     Icon: Video,
     details:
       "We create short videos for Instagram, Facebook, TikTok, and YouTube Shorts. We add hooks, captions, music, transitions, and call-to-actions to help customers stop scrolling.",
@@ -160,10 +159,26 @@ const plans = [
 ];
 
 const process = [
-  ["01", "Audit", "We review your website, Google profile, ads, competitors, reviews, and conversion gaps."],
-  ["02", "Strategy", "We build your offer, audience, funnel, creative direction, and lead tracking plan."],
-  ["03", "Launch", "We launch ads, landing pages, creatives, automations, and reporting dashboards."],
-  ["04", "Optimize", "We improve campaigns weekly based on calls, leads, sales, ROAS, and customer data."],
+  [
+    "01",
+    "Audit",
+    "We review your website, Google profile, ads, competitors, reviews, and conversion gaps.",
+  ],
+  [
+    "02",
+    "Strategy",
+    "We build your offer, audience, funnel, creative direction, and lead tracking plan.",
+  ],
+  [
+    "03",
+    "Launch",
+    "We launch ads, landing pages, creatives, automations, and reporting dashboards.",
+  ],
+  [
+    "04",
+    "Optimize",
+    "We improve campaigns weekly based on calls, leads, sales, ROAS, and customer data.",
+  ],
 ];
 
 const proof = [
@@ -212,7 +227,10 @@ export default function Home() {
 
               <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
                 {proof.map(([num, label]) => (
-                  <div key={label} className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <div
+                    key={label}
+                    className="rounded-2xl border border-white/10 bg-white/10 p-4"
+                  >
                     <b className="block text-2xl">{num}</b>
                     <span className="text-xs text-slate-300">{label}</span>
                   </div>
@@ -242,7 +260,9 @@ export default function Home() {
 
               <div className="mt-5 rounded-3xl bg-white/10 p-5">
                 <p className="text-sm text-slate-300">This Week</p>
-                <h3 className="mt-2 text-3xl font-black">Leads, calls, rankings, and revenue in one dashboard.</h3>
+                <h3 className="mt-2 text-3xl font-black">
+                  Leads, calls, rankings, and revenue in one dashboard.
+                </h3>
               </div>
             </div>
           </div>
@@ -250,11 +270,16 @@ export default function Home() {
 
         <section className="border-b border-slate-200 bg-soft py-8">
           <div className="mx-auto grid max-w-7xl gap-6 px-5 md:grid-cols-5">
-            {["Google Ads", "Meta Ads", "Local SEO", "CRM Automation", "AI Creative"].map((x) => (
-              <div key={x} className="rounded-2xl bg-white p-4 text-center font-black text-slate-600 shadow-sm">
-                {x}
-              </div>
-            ))}
+            {["Google Ads", "Meta Ads", "Local SEO", "CRM Automation", "AI Creative"].map(
+              (x) => (
+                <div
+                  key={x}
+                  className="rounded-2xl bg-white p-4 text-center font-black text-slate-600 shadow-sm"
+                >
+                  {x}
+                </div>
+              )
+            )}
           </div>
         </section>
 
@@ -266,23 +291,35 @@ export default function Home() {
                 We don’t just run ads. We build your complete customer engine.
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-500">
-                Traffic, conversion, automation, creative, retention, and reporting — all handled by one team.
+                Traffic, conversion, automation, creative, retention, and
+                reporting — all handled by one team.
               </p>
             </div>
 
             <div className="grid gap-5 md:grid-cols-4">
-  {services.map(([title, desc, Icon]: any)=>
-    <div className="card p-6" key={title}>
-      <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-brand">
-        <Icon />
-      </div>
+              {services.map(({ title, desc, Icon, details }) => (
+                <details
+                  key={title}
+                  className="card p-6 transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-brand">
+                    <Icon />
+                  </div>
 
-      <h3 className="mb-2 text-xl font-black">{title}</h3>
+                  <h3 className="mb-2 text-xl font-black">{title}</h3>
+                  <p className="leading-7 text-slate-500">{desc}</p>
 
-      <p className="leading-7 text-slate-500">{desc}</p>
-    </div>
-  )}
-</div>          </div>
+                  <summary className="mt-5 cursor-pointer rounded-full bg-navy px-5 py-3 text-center text-sm font-black text-white">
+                    See How This Works
+                  </summary>
+
+                  <p className="mt-4 rounded-2xl bg-soft p-4 text-sm leading-7 text-slate-600">
+                    {details}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="bg-navy py-24 text-white">
@@ -290,17 +327,30 @@ export default function Home() {
             <div className="mx-auto mb-12 max-w-3xl text-center">
               <p className="font-black text-emerald-300">WHY APEXGROWTH</p>
               <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
-                Built for business owners who care about revenue, not vanity metrics.
+                Built for business owners who care about revenue, not vanity
+                metrics.
               </h2>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
               {[
-                ["Revenue-first strategy", "We focus on calls, leads, bookings, orders, and actual business growth."],
-                ["AI-powered execution", "Automations help recover missed leads, follow up faster, and improve conversion."],
-                ["Clear weekly reporting", "You see what worked, what failed, and what we are improving next."],
+                [
+                  "Revenue-first strategy",
+                  "We focus on calls, leads, bookings, orders, and actual business growth.",
+                ],
+                [
+                  "AI-powered execution",
+                  "Automations help recover missed leads, follow up faster, and improve conversion.",
+                ],
+                [
+                  "Clear weekly reporting",
+                  "You see what worked, what failed, and what we are improving next.",
+                ],
               ].map(([title, text]) => (
-                <div key={title} className="rounded-[2rem] border border-white/10 bg-white/10 p-8">
+                <div
+                  key={title}
+                  className="rounded-[2rem] border border-white/10 bg-white/10 p-8"
+                >
                   <h3 className="text-2xl font-black">{title}</h3>
                   <p className="mt-4 leading-7 text-slate-300">{text}</p>
                 </div>
@@ -316,13 +366,17 @@ export default function Home() {
                 Industry-specific growth systems.
               </h2>
               <p className="mt-4 text-lg text-slate-500">
-                No generic marketing. We build offers, ads, pages, and content for your exact market.
+                No generic marketing. We build offers, ads, pages, and content
+                for your exact market.
               </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-5">
               {industries.map((i) => (
-                <div key={i} className="rounded-2xl border border-slate-200 bg-white p-5 text-center font-black shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <div
+                  key={i}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 text-center font-black shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                >
                   {i}
                 </div>
               ))}
@@ -340,8 +394,18 @@ export default function Home() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              {["Restaurant Offer Flyers", "Professional Reels", "Landing Pages", "Logo & Branding", "Ad Creatives", "Video Edits"].map((x) => (
-                <div key={x} className="card overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
+              {[
+                "Restaurant Offer Flyers",
+                "Professional Reels",
+                "Landing Pages",
+                "Logo & Branding",
+                "Ad Creatives",
+                "Video Edits",
+              ].map((x) => (
+                <div
+                  key={x}
+                  className="card overflow-hidden transition hover:-translate-y-1 hover:shadow-xl"
+                >
                   <div className="h-48 bg-gradient-to-br from-blue-100 via-cyan-100 to-emerald-100 p-6">
                     <div className="flex h-full items-center justify-center rounded-3xl border border-white/70 bg-white/55 text-center text-2xl font-black text-slate-700">
                       {x}
@@ -350,7 +414,8 @@ export default function Home() {
                   <div className="p-6">
                     <h3 className="text-xl font-black">{x}</h3>
                     <p className="mt-2 text-slate-500">
-                      Premium design system ready for ads, websites, social media, and print.
+                      Premium design system ready for ads, websites, social
+                      media, and print.
                     </p>
                   </div>
                 </div>
@@ -370,7 +435,10 @@ export default function Home() {
 
             <div className="grid gap-6 md:grid-cols-4">
               {process.map(([num, title, text]) => (
-                <div key={title} className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+                <div
+                  key={title}
+                  className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm"
+                >
                   <div className="mb-6 inline-flex rounded-full bg-blue-50 px-4 py-2 font-black text-brand">
                     {num}
                   </div>
@@ -390,7 +458,8 @@ export default function Home() {
                 Choose your growth package.
               </h2>
               <p className="mt-4 text-slate-500">
-                Ad spend is separate. Custom packages available for franchises and multi-location businesses.
+                Ad spend is separate. Custom packages available for franchises
+                and multi-location businesses.
               </p>
             </div>
 
@@ -399,7 +468,9 @@ export default function Home() {
                 <div
                   key={p.name}
                   className={`relative rounded-[2rem] border bg-white p-7 shadow-sm transition hover:-translate-y-2 hover:shadow-xl ${
-                    p.highlight ? "border-brand ring-4 ring-blue-100" : "border-slate-200"
+                    p.highlight
+                      ? "border-brand ring-4 ring-blue-100"
+                      : "border-slate-200"
                   }`}
                 >
                   <span
@@ -411,7 +482,9 @@ export default function Home() {
                   </span>
 
                   <h3 className="mt-3 text-2xl font-black">{p.name}</h3>
-                  <p className="mt-3 min-h-20 text-sm leading-6 text-slate-500">{p.desc}</p>
+                  <p className="mt-3 min-h-20 text-sm leading-6 text-slate-500">
+                    {p.desc}
+                  </p>
 
                   <div className="my-6 text-4xl font-black">
                     {p.price}
@@ -430,7 +503,9 @@ export default function Home() {
                   <a
                     href="#contact"
                     className={`mt-8 inline-flex w-full justify-center rounded-full px-5 py-4 font-black ${
-                      p.highlight ? "gradient-brand text-white" : "bg-navy text-white"
+                      p.highlight
+                        ? "gradient-brand text-white"
+                        : "bg-navy text-white"
                     }`}
                   >
                     Choose {p.name}
@@ -442,30 +517,6 @@ export default function Home() {
         </section>
 
         <ROICalculator />
-
-        <section className="bg-navy py-24 text-white">
-          <div className="mx-auto max-w-7xl px-5">
-            <div className="mx-auto mb-12 max-w-3xl text-center">
-              <p className="font-black text-emerald-300">CLIENT RESULTS</p>
-              <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
-                Built for businesses that want measurable growth.
-              </h2>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {[
-                ["Restaurant Growth", "Better offers, Google visibility, social content, and repeat customer campaigns."],
-                ["Local Service Leads", "Google Ads, landing pages, call tracking, and lead follow-up automation."],
-                ["Premium Brand Look", "Flyers, reels, websites, and content that make the business look established."],
-              ].map(([title, text]) => (
-                <div key={title} className="rounded-[2rem] border border-white/10 bg-white/10 p-8">
-                  <h3 className="text-2xl font-black">{title}</h3>
-                  <p className="mt-4 leading-7 text-slate-300">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section id="faq" className="bg-soft py-24">
           <div className="mx-auto max-w-4xl px-5">
@@ -480,7 +531,10 @@ export default function Home() {
               ["Can you market restaurants and cloud kitchens?", "Yes. Restaurants and cloud kitchens are one of our strongest niches."],
               ["Can you connect forms to CRM or email?", "Yes. We can connect to Gmail, Google Sheets, HubSpot, Zoho, or other CRMs."],
             ].map(([q, a]) => (
-              <details key={q} className="mb-3 rounded-2xl border border-slate-200 bg-white p-5">
+              <details
+                key={q}
+                className="mb-3 rounded-2xl border border-slate-200 bg-white p-5"
+              >
                 <summary className="cursor-pointer font-black">{q}</summary>
                 <p className="mt-3 leading-7 text-slate-500">{a}</p>
               </details>
@@ -496,7 +550,8 @@ export default function Home() {
                 Get your free growth proposal.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-500">
-                Tell us about your business. We will prepare a plan for ads, SEO, creative content, website improvements, and automation.
+                Tell us about your business. We will prepare a plan for ads,
+                SEO, creative content, website improvements, and automation.
               </p>
 
               <div className="mt-8 rounded-3xl bg-soft p-6">
@@ -508,12 +563,24 @@ export default function Home() {
 
             <form className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-xl">
               <div className="grid gap-4 md:grid-cols-2">
-                <input className="rounded-2xl border border-slate-200 p-4" placeholder="Name" />
-                <input className="rounded-2xl border border-slate-200 p-4" placeholder="Phone" />
+                <input
+                  className="rounded-2xl border border-slate-200 p-4"
+                  placeholder="Name"
+                />
+                <input
+                  className="rounded-2xl border border-slate-200 p-4"
+                  placeholder="Phone"
+                />
               </div>
 
-              <input className="mt-4 w-full rounded-2xl border border-slate-200 p-4" placeholder="Email" />
-              <input className="mt-4 w-full rounded-2xl border border-slate-200 p-4" placeholder="Business / Website URL" />
+              <input
+                className="mt-4 w-full rounded-2xl border border-slate-200 p-4"
+                placeholder="Email"
+              />
+              <input
+                className="mt-4 w-full rounded-2xl border border-slate-200 p-4"
+                placeholder="Business / Website URL"
+              />
 
               <textarea
                 className="mt-4 w-full rounded-2xl border border-slate-200 p-4"
@@ -521,7 +588,10 @@ export default function Home() {
                 placeholder="What do you want help with?"
               />
 
-              <button type="button" className="gradient-brand mt-4 w-full rounded-full px-6 py-4 font-black text-white">
+              <button
+                type="button"
+                className="gradient-brand mt-4 w-full rounded-full px-6 py-4 font-black text-white"
+              >
                 Request Free Proposal
               </button>
 
